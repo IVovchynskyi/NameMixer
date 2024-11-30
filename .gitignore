@@ -1,0 +1,17 @@
+/.vs
+/NameMixer/NameMixer/obj
+/NameMixer/NameMixer/bin
+
+
+/*.pdb
+
+*.suo
+*.user
+
+*.log
+
+_ReSharper.*
+*.tmp
+*.bak
+
+/NameMixer/.vs
