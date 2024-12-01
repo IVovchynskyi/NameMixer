@@ -15,7 +15,7 @@ public class Person
 
 class Program
 {
-    static (List<Person> validPersons, List<string> invalidLines) ReadPersonsFromFile(string filePath)
+    public static (List<Person> validPersons, List<string> invalidLines) ReadPersonsFromFile(string filePath)
     {
         var validPersons = new List<Person>();
         var invalidLines = new List<string>();
@@ -45,21 +45,31 @@ class Program
         return (validPersons, invalidLines);
     }
 
-    static void Main(string[] args)
+    static (HashSet<string> allFirstNames, HashSet<string> allLastNames) GetUniqueNames(List<Person> persons)
+    {
+        var allFirstNames = new HashSet<string>();
+        var allLastNames = new HashSet<string>();
+        foreach (var person in persons)
+        {
+            allFirstNames.Add(person.FirstName);
+            allLastNames.Add(person.LastName);
+        }
+        return (allFirstNames, allLastNames);
+    }
+
+
+
+   static void Main(string[] args)
     {
         string filePath = @"C:\Users\Igor V\Documents\GitHub\NameMixer\NameMixer\NameMixer\TestData.dat"; // the input file location
-        var result = ReadPersonsFromFile(filePath);
-
-        Console.WriteLine("Valid Persons:");
-        foreach (var person in result.validPersons)
+        var readed = ReadPersonsFromFile(filePath);
+        var uniqueEntities = GetUniqueNames(readed.validPersons);
+        foreach (var firstName in uniqueEntities.allFirstNames) 
         {
-            Console.WriteLine(person);
-        }
-
-        Console.WriteLine("\nInvalid Lines:");
-        foreach (var invalidLine in result.invalidLines)
-        {
-            Console.WriteLine(invalidLine);
+            foreach (var lastName in uniqueEntities.allLastNames)
+            {
+                Console.WriteLine(firstName + ' ' + lastName);
+            }
         }
     }
 }
