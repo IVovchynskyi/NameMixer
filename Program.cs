@@ -1,2 +1,15 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿try
+{
+    StreamReader sr = new StreamReader(@"..\..\..\data_example.dat");
+    var line = sr.ReadLine();
+    
+    while (line != null)
+    {
+        Console.WriteLine(line);
+        line = sr.ReadLine();
+    }
+}
+finally
+{
+    Console.WriteLine("reading finished");
+}
